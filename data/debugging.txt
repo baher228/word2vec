@@ -1,0 +1,3 @@
+cat sat on mat.
+dog sat on rug.
+cat and dog played together.
