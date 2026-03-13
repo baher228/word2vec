@@ -11,10 +11,14 @@ def map_words(text):
     word_to_id = {}
     id_to_word = {}
     encoded = []
+    frequencies = []
     for word in text.split():
         if word not in word_to_id:
             index = len(word_to_id)
             word_to_id[word] = index
             id_to_word[index] = word
-        encoded.append(word_to_id[word])
-    return word_to_id, id_to_word, encoded
+            frequencies.append(0)
+        word_id = word_to_id[word]
+        encoded.append(word_id)
+        frequencies[word_id] += 1
+    return word_to_id, id_to_word, encoded, frequencies
