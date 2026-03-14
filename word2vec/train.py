@@ -7,7 +7,6 @@ from model import SkipGramNS
 
 
 def build_training_pairs(tokens, window_size):
-    # `generate_positive_context` returns positions; convert them to token ids.
     position_pairs = generate_positive_context(tokens, window_size)
     center_ids = np.asarray([tokens[center_pos] for center_pos, _ in position_pairs], dtype=np.int64)
     pos_context_ids = np.asarray([tokens[ctx_pos] for _, ctx_pos in position_pairs], dtype=np.int64)
@@ -30,7 +29,7 @@ def train_skipgram_ns(center_ids, pos_context_ids, neg_probs, vocab_size, embed_
                 learning_rate=learning_rate,
             )
 
-        epoch_loss = model.forward_pass(center_ids, pos_context_ids, neg_samples, K=K)
+        epoch_loss = model.forward_pass(center_ids, pos_context_ids, neg_samples)
         print(f"epoch {epoch}/{epochs} - loss: {epoch_loss:.4f}")
 
     return model
@@ -71,4 +70,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
